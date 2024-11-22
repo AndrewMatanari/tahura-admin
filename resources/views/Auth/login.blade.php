@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,32 +12,43 @@
 </head>
 
 <body>
-    <div id="auth">
-        
+    <div id="auth">        
 <div class="row h-100">
     <div class="col-lg-5 col-12">
         <div id="auth-left">
             <div class="auth-logo">
-                <a href="{{route('/')}}"><img src="assets/images/logo/logo.svg" alt="Logo"></a>
+                <a href="index.html"><img src="assets/images/logo/logo.svg" alt="Logo"></a>
             </div>
             <h1 class="auth-title">Log in.</h1>
             <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
 
-            <form action="index.html">
+            <form method="POST" action="{{ route('login.store') }}">
+                @csrf
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="text" class="form-control form-control-xl" placeholder="Username">
+                    <input type="text" id="email" name="email" class="form-control @error('email') is-invalid @enderror form-control-xl" placeholder="Email" value="{{ old('email') }}">
                     <div class="form-control-icon">
                         <i class="bi bi-person"></i>
                     </div>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
+
                 <div class="form-group position-relative has-icon-left mb-4">
-                    <input type="password" class="form-control form-control-xl" placeholder="Password">
+                    <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror form-control-xl" placeholder="Password">
                     <div class="form-control-icon">
                         <i class="bi bi-shield-lock"></i>
                     </div>
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                 </div>
                 <div class="form-check form-check-lg d-flex align-items-end">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault" {{ old('remember') ? 'checked' : '' }}>
                     <label class="form-check-label text-gray-600" for="flexCheckDefault">
                         Keep me logged in
                     </label>

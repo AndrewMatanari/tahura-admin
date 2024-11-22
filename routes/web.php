@@ -16,13 +16,14 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
 Route::resource('customers', CustomerController::class);
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class,'login'])->name('login.store');
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

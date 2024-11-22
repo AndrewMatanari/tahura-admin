@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <title>Dashboard - Pet Care Admin Dashboard</title>
     
     <link rel="stylesheet" href="assets/css/main/app.css">
     <link rel="stylesheet" href="assets/css/main/app-dark.css">
@@ -421,12 +421,15 @@
                 </a>
             </li>
             
-            <li
-                class="sidebar-item  ">
-                <a href="https://github.com/zuramai/mazer#donation" class='sidebar-link'>
-                    <i class="bi bi-cash"></i>
-                    <span>Donate</span>
+            <li>
+                <a href="{{ route('logout') }}" class="sidebar-link" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Logout</span>
                 </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </li>
             
         </ul>
@@ -708,11 +711,11 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>2021 &copy; Mazer</p>
+                        <p><?php echo date("Y"); ?> &copy; AndrewLab</p>
                     </div>
                     <div class="float-end">
                         <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                                href="https://saugi.me">Saugi</a></p>
+                                href="https://portofolio.andrewlab.my.id">Andrew Lawrance Matanari</a></p>
                     </div>
                 </div>
             </footer>
