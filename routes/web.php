@@ -16,22 +16,26 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
+    Route::resource('customers', CustomerController::class);
+    Route::resource('users', \App\Http\Controllers\UserController::class);
+    Route::resource('pets', \App\Http\Controllers\PetController::class);
+    Route::resource('reservations', \App\Http\Controllers\ReservationController::class);
+    Route::resource('transactions', \App\Http\Controllers\TransactionController::class);
+    Route::resource('employees', \App\Http\Controllers\EmployeesController::class);
+    Route::resource('services', \App\Http\Controllers\ServiceController::class);
+    
+    
 
-//     Route::resource('customers', CustomerController::class);
-// });
+});
 
-// Route::middleware('guest')->group(function () {
-//     Route::get('/', [LoginController::class, 'index'])->name('login'); 
-//     Route::post('/login', [LoginController::class,'login'])->name('login.store');
-//     Route::get('/register', [RegisterController::class, 'index'])->name('register');
-//     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-// });
+Route::middleware('guest')->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('login'); 
+    Route::post('/login', [LoginController::class,'login'])->name('login.store');
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+});
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
-Route::get('/', function(){
-    return view('ui.master');}
-);
+
