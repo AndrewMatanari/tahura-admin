@@ -16,14 +16,20 @@ use App\Http\Controllers\CustomerController;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resource('customers', CustomerController::class);
 });
 
-Route::resource('customers', CustomerController::class);
+Route::middleware('guest')->group(function () {
+    Route::get('/', [LoginController::class, 'index'])->name('login'); 
+    Route::post('/login', [LoginController::class,'login'])->name('login.store');
+    Route::get('/register', [RegisterController::class, 'index'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+});
 
-Route::get('/', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class,'login'])->name('login.store');
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
+
