@@ -42,6 +42,7 @@
                                         <td style="text-align: center;">
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-sm btn-outline-success mx-1">Edit</a>
+                                                <a href="{{ route('customers.show', $customer->id) }}" class="btn btn-sm btn-outline-info mx-1">Detail</a>
                                                 <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')

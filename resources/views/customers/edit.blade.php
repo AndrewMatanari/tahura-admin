@@ -1,5 +1,4 @@
 @extends('ui.master')
-
 @section('title', isset($customer) ? 'Edit' : 'Add' . ' Customer')
 @section('content')
     <section class="section">
@@ -78,4 +77,3 @@
         </div>
     </section>
 @endsection
-

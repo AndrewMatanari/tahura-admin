@@ -19,6 +19,7 @@ class CustomersSeeder extends Seeder
                 'email' => "customer$i@example.com",
                 'phone' => "123-456-$i",
                 'address' => "$i Main St",
+                'photo' => "https://via.placeholder.com/150",
             ]);
         }
     }
