@@ -53,10 +53,10 @@
                 </a>
             </li>
 
-            <li class="sidebar-item ">
-                <a href="application-chat.html" class='sidebar-link'>
+            <li class="sidebar-item {{ request()->routeIs('employee.index') ? 'active' : '' }}">
+                <a href="{{ route('employees.index') }}" class='sidebar-link'>
                     <i class="bi bi-person-badge-fill"></i>
-                    <span>List Doctor</span>
+                    <span>List Employee</span>
                 </a>
             </li>
 

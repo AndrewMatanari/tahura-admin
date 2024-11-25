@@ -45,14 +45,14 @@ Route::middleware('auth')->group(function () {
     //transaction
     Route::resource('transactions', \App\Http\Controllers\TransactionController::class);
     //employee
-    Route::get('/data-employees', [\App\Http\Controllers\EmployeesController::class, 'index'])->name('employee.index');
-    Route::get('/edit-employees->{employee}', [\App\Http\Controllers\EmployeesController::class, 'edit'])->name('employee.edit');
-    Route::put('/data-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employee.update');
-    Route::patch('/data-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employee.update');
-    Route::delete('/data-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'destroy'])->name('employee.destroy');
-    Route::get('/create-employee', [\App\Http\Controllers\EmployeesController::class, 'create'])->name('employee.create');
-    Route::post('/store-employees', [\App\Http\Controllers\EmployeesController::class, 'store'])->name('employee.store');
-    Route::get('/show-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'show'])->name('employee.show');
+    Route::get('/data-employees', [\App\Http\Controllers\EmployeesController::class, 'index'])->name('employees.index');
+    Route::get('/edit-employees->{employees}', [\App\Http\Controllers\EmployeesController::class, 'edit'])->name('employees.edit');
+    Route::put('/data-employees/{employees}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employees.update');
+    Route::patch('/data-employees/{employees}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employees.update');
+    Route::delete('/data-employees/{employees}', [\App\Http\Controllers\EmployeesController::class, 'destroy'])->name('employees.destroy');
+    Route::get('/create-employee', [\App\Http\Controllers\EmployeesController::class, 'create'])->name('employees.create');
+    Route::post('/store-employees', [\App\Http\Controllers\EmployeesController::class, 'store'])->name('employees.store');
+    Route::get('/show-employees->{employees}', [\App\Http\Controllers\EmployeesController::class, 'show'])->name('employees.show');
     //service
     Route::resource('services', \App\Http\Controllers\ServiceController::class);
     

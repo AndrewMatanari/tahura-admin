@@ -14,10 +14,7 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Name</label>
-                                    </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <div class="form-group has-icon-left">
                                             <div class="position-relative">
                                                 <input type="text" class="form-control" placeholder="Name"
@@ -30,11 +27,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-8">
                                         <div class="form-group has-icon-left">
                                             <div class="position-relative">
                                                 <input type="email" class="form-control" placeholder="Email"
@@ -47,11 +39,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Mobile</label>
-                                    </div>
-                                    <div class="col-md-8">
                                         <div class="form-group has-icon-left">
                                             <div class="position-relative">
                                                 <input type="number" class="form-control" placeholder="Mobile"
@@ -64,11 +51,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Password</label>
-                                    </div>
-                                    <div class="col-md-8">
                                         <div class="form-group has-icon-left">
                                             <div class="position-relative">
                                                 <input type="password" class="form-control" placeholder="Password"
@@ -81,11 +63,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Confirm Password</label>
-                                    </div>
-                                    <div class="col-md-8">
                                         <div class="form-group has-icon-left">
                                             <div class="position-relative">
                                                 <input type="password" class="form-control" placeholder="Confirm Password"
@@ -98,12 +75,7 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Role</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="form-group">
+                                        <div class="form-group has-icon-left">
                                             <select name="role" id="role" class="form-control">
                                                 <option value="">Select Role</option>
                                                 <option value="admin">Admin</option>
@@ -114,20 +86,18 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                    <label class="form-label" for="photo">Photo</label>
-                                    <input class="form-control @error('photo') is-invalid @enderror" type="file" name="photo" id="photo">
-                                    @error('photo')
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                                    </div>
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        <div class="form-group">
+                                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo" id="photo">
+                                            @error('photo')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
