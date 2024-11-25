@@ -45,7 +45,14 @@ Route::middleware('auth')->group(function () {
     //transaction
     Route::resource('transactions', \App\Http\Controllers\TransactionController::class);
     //employee
-    Route::resource('employees', \App\Http\Controllers\EmployeesController::class);
+    Route::get('/data-employees', [\App\Http\Controllers\EmployeesController::class, 'index'])->name('employee.index');
+    Route::get('/edit-employees->{employee}', [\App\Http\Controllers\EmployeesController::class, 'edit'])->name('employee.edit');
+    Route::put('/data-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employee.update');
+    Route::patch('/data-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employee.update');
+    Route::delete('/data-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'destroy'])->name('employee.destroy');
+    Route::get('/create-employee', [\App\Http\Controllers\EmployeesController::class, 'create'])->name('employee.create');
+    Route::post('/store-employees', [\App\Http\Controllers\EmployeesController::class, 'store'])->name('employee.store');
+    Route::get('/show-employees/{employee}', [\App\Http\Controllers\EmployeesController::class, 'show'])->name('employee.show');
     //service
     Route::resource('services', \App\Http\Controllers\ServiceController::class);
     

@@ -31,7 +31,7 @@
                     <table class="table table-bordered table-hover">
                         <thead class="table-dark">
                             <tr style="text-align: center;">
-                                <th scope="col" style="width: 5%;">No</th>
+                                <th scope="col" >No</th>
                                 <th scope="col" ><strong>Nama</strong></th>
                                 <th scope="col"><strong>Email</strong></th>
                                 <th scope="col"><strong> Photo </strong></th>
@@ -41,7 +41,7 @@
                         </thead>
                         <tbody>
                             @forelse ($users as $user)
-                                <tr>
+                                <tr style="text-align: center;">
                                     <td style="text-align: center;">{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
