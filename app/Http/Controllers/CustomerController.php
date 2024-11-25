@@ -8,78 +8,137 @@ use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
-    // Menampilkan daftar customer
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $customers = Customer::paginate(10); // Menampilkan 10 data per halaman
         return view('customers.index', compact('customers'));
     }
 
-    // Menampilkan form untuk menambah customer baru
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('customers.create');
     }
 
-    // Menyimpan data customer baru
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:customers,email',
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|numeric',
             'address' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Validasi file gambar
         ]);
 
-        $customer = new Customer($request->except('image'));
+        // Menyiapkan data customer yang akan disimpan
+        $data = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ];
 
-        if ($request->hasFile('image')) {
-            $customer->image = $request->file('image')->store('customers', 'public');
+        // Jika ada file foto, simpan gambar dan path-nya
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = $file->hashName();
+            $filePath = $file->storeAs('public', $fileName);
+            $data['photo'] = $filePath;
         }
 
-        $customer->save();
+        // Membuat customer baru
+        Customer::create($data);
 
         return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
     }
 
-    // Menampilkan form untuk mengedit customer
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Customer $customer)
+    {
+        return view('customers.show', compact('customer'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Customer $customer)
     {
         return view('customers.edit', compact('customer'));
     }
 
-    // Memperbarui data customer
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:customers,email,' . $customer->id,
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|numeric',
             'address' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',  // Validasi file gambar
         ]);
 
-        $customer->fill($request->except('image'));
+        // Menyiapkan data customer yang akan disimpan
+        $data = [
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ];
 
-        if ($request->hasFile('image')) {
-            if ($customer->image) {
-                // Hapus gambar lama jika ada
-                Storage::delete('public/' . $customer->image);
+        // Jika ada file foto, simpan gambar dan path-nya
+        if ($request->hasFile('photo')) {
+            // Hapus foto lama jika ada
+            if ($customer->photo) {
+                Storage::delete('public/' . $customer->photo);
             }
-            $customer->image = $request->file('image')->store('customers', 'public');
+
+            $file = $request->file('photo');
+            $fileName = $file->hashName();
+            $filePath = $file->storeAs('public', $fileName);
+            $data['photo'] = $filePath;
         }
 
-        $customer->save();
+        // Update customer yang sudah ada
+        $customer->update($data);
 
         return redirect()->route('customers.index')->with('success', 'Customer updated successfully.');
     }
 
-    // Menghapus data customer
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Customer  $customer
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Customer $customer)
     {
-        if ($customer->image) {
-            Storage::delete('public/' . $customer->image);
+        if ($customer->photo) {
+            Storage::delete('public/' . $customer->photo);
         }
         $customer->delete();
         return redirect()->route('customers.index')->with('success', 'Customer deleted successfully.');

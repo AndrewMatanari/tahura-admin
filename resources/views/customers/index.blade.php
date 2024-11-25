@@ -1,50 +1,68 @@
-@extends('layouts.app')
-
+@extends('ui.master')
+@section('title', 'Customer List')
 @section('content')
-    <h1 class="mb-4">Customer List</h1>
-
-    <a href="{{ route('customers.create') }}" class="btn btn-success mb-3">Add New Customer</a>
-
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($customers as $customer)
-                <tr>
-                    <td>
-                        @if ($customer->image)
-                            <img src="{{ asset('storage/' . $customer->image) }}" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
-                        @else
-                            <img src="{{ asset('images/default-avatar.jpg') }}" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
-                        @endif
-                    </td>
-                    <td>{{ $customer->name }}</td>
-                    <td>{{ $customer->email }}</td>
-                    <td>{{ $customer->phone }}</td>
-                    <td>{{ $customer->address }}</td>
-                    <td class="text-center">
-                        <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="row" id="basic-table">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="mb-4 card-title text-center text-uppercase">Customer List</h1>
+                    <div class="card-header-action">
+                        <a href="{{ route('customers.create') }}" class="btn btn-success">Add New Customer</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-dark">
+                                <tr style="text-align: center;">
+                                    <th scope="col" style="width: 5%;">No</th>
+                                    <th scope="col"><strong>Name</strong></th>
+                                    <th scope="col"><strong>Email</strong></th>
+                                    <th scope="col"><strong>Phone</strong></th>
+                                    <th scope="col"><strong>Address</strong></th>
+                                    <th scope="col"><strong>Photo</strong></th>
+                                    <th scope="col" class="text-center" style="width: 15%"><strong>Actions</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($customers as $customer)
+                                    <tr>
+                                        <td style="text-align: center;">{{ $loop->iteration }}</td>
+                                        <td>{{ $customer->name }}</td>
+                                        <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->phone }}</td>
+                                        <td>{{ $customer->address }}</td>
+                                        <td style="text-align: center;">
+                                            @if ($customer->photo)
+                                                <img src="{{ $customer->photo }}" alt="Customer Image" class="rounded-circle" style="width: 50px; height: 50px;">
+                                            @else
+                                                <span>No Image</span>
+                                            @endif
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-sm btn-outline-success mx-1">Edit</a>
+                                                <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger mx-1" onclick="return confirm('Apakah Anda yakin ingin menghapus customer ini?')">Hapus</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Pagination -->
     <div class="d-flex justify-content-center">
         {{ $customers->links() }}
     </div>
 @endsection
+
+

@@ -17,15 +17,12 @@
                 </a>
             </header>
             
-<div class="page-heading">
-    <h3>Dashboard Admin</h3>
-</div>
-
-
-    @include('design.footer')
+            @yield('content')
+            @include('design.footer')
         </div>
     </div>
     @include('design.script')
 </body>
 
 </html>
+

@@ -14,7 +14,7 @@ class customer extends Model
         'email',
         'phone',
         'address',
-        'image',
+        'photo',
     ];
 
     public function pets()
@@ -27,7 +27,9 @@ class customer extends Model
         return $this->hasMany(Reservations::class);
     }
     
+    public function getPhotoAttribute($value)
+    {
+        return url('storage/' . $value);
+    }
 }
-
-
 

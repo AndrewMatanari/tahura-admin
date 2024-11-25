@@ -31,64 +31,57 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
-            
-            <li
-                class="sidebar-item active ">
-                <a href="{{ url('/dashboard') }}" class='sidebar-link'>
+
+            <li class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            
-            <li
-                class="sidebar-item">
-                <a href="{{ url('/user') }}" class='sidebar-link'>
+
+            <li class="sidebar-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
+                <a href="{{ route('user.index') }}" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
                     <span>User</span>
                 </a>
+            </li>
             <li class="sidebar-title">Pet Care</li>
-            <li
-                class="sidebar-item  ">
-                <a href="application-email.html" class='sidebar-link'>
+            <li class="sidebar-item {{ request()->routeIs('customers.index') ? 'active' : '' }}">
+                <a href="{{route('customers.index')}}" class='sidebar-link'>
                     <i class="bi bi-people-fill"></i>
                     <span>Customers</span>
                 </a>
             </li>
-            
-            <li
-                class="sidebar-item  ">
+
+            <li class="sidebar-item ">
                 <a href="application-chat.html" class='sidebar-link'>
                     <i class="bi bi-person-badge-fill"></i>
                     <span>List Doctor</span>
                 </a>
             </li>
-            
-            <li
-                class="sidebar-item  ">
+
+            <li class="sidebar-item ">
                 <a href="application-gallery.html" class='sidebar-link'>
                     <i class="bi bi-bug-fill"></i>
                     <span>Pets</span>
                 </a>
             </li>
 
-            <li
-                class="sidebar-item  ">
+            <li class="sidebar-item ">
                 <a href="application-gallery.html" class='sidebar-link'>
                     <i class="bi bi-file-arrow-down-fill"></i>
                     <span>Reservations</span>
                 </a>
             </li>
 
-            <li
-                class="sidebar-item  ">
+            <li class="sidebar-item ">
                 <a href="application-gallery.html" class='sidebar-link'>
                     <i class="bi bi-clipboard2-heart-fill"></i>
                     <span>Services</span>
                 </a>
             </li>
 
-            <li
-                class="sidebar-item  ">
+            <li class="sidebar-item ">
                 <a href="application-gallery.html" class='sidebar-link'>
                     <i class="bi bi-cash-coin"></i>
                     <span>Transactions</span>

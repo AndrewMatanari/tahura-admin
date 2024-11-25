@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'photo',
+        'role',
     ];
 
     /**
@@ -43,4 +45,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function getPhotoAttribute($value)
+    {
+        return url('storage/' . $value);
+    }
 }
+
