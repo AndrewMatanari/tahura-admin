@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TiketControllerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,14 +21,14 @@ use App\Http\Controllers\UserController;
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');
     //customer
-    Route::get('/data-customers', [CustomerController::class, 'index'])->name('customers.index');
-    Route::get('/edit-customers->{customer}', [CustomerController::class, 'edit'])->name('customers.edit');
-    Route::put('/data-customers/{customer}', [CustomerController::class, 'update'])->name('customers.update');
-    Route::patch('/data-customers/{customer}', [CustomerController::class, 'update'])->name('customers.update'); 
-    Route::delete('/data-customers/{customer}', [CustomerController::class, 'destroy'])->name('customers.destroy');
-    Route::get('/create-customer', [CustomerController::class, 'create'])->name('customers.create');
-    Route::post('/store-customers', [CustomerController::class, 'store'])->name('customers.store');
-    Route::get('/show-customers->{customer}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::get('/data-transaksi', [CustomerController::class, 'index'])->name('transaksi.index');
+    Route::get('/edit-transaksi->{customer}', [CustomerController::class, 'edit'])->name('transaksi.edit');
+    Route::put('/data-transaksi/{customer}', [CustomerController::class, 'update'])->name('transaksi.update');
+    Route::patch('/data-transaksi/{customer}', [CustomerController::class, 'update'])->name('transaksi.update'); 
+    Route::delete('/data-transaksi/{customer}', [CustomerController::class, 'destroy'])->name('transaksi.destroy');
+    Route::get('/create-customer', [CustomerController::class, 'create'])->name('transaksi.create');
+    Route::post('/store-transaksi', [CustomerController::class, 'store'])->name('transaksi.store');
+    Route::get('/show-transaksi->{customer}', [CustomerController::class, 'show'])->name('transaksi.show');
     //user
     Route::get('/data-users', [UserController::class, 'index'])->name('user.index');
     Route::get('/edit-users->{user}', [UserController::class, 'edit'])->name('user.edit');
@@ -38,23 +39,33 @@ Route::middleware('auth')->group(function () {
     Route::post('/store-users', [UserController::class, 'store'])->name('user.store');
     Route::get('/show-users->{user}', [UserController::class, 'show'])->name('user.show');
 
-    //pet
-    Route::resource('pets', \App\Http\Controllers\PetController::class);
-    //reservation
-    Route::resource('reservations', \App\Http\Controllers\ReservationController::class);
-    //transaction
-    Route::resource('transactions', \App\Http\Controllers\TransactionController::class);
-    //employee
-    Route::get('/data-employees', [\App\Http\Controllers\EmployeesController::class, 'index'])->name('employees.index');
-    Route::get('/edit-employees->{employees}', [\App\Http\Controllers\EmployeesController::class, 'edit'])->name('employees.edit');
-    Route::put('/data-employees/{employees}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employees.update');
-    Route::patch('/data-employees/{employees}', [\App\Http\Controllers\EmployeesController::class, 'update'])->name('employees.update');
-    Route::delete('/data-employees/{employees}', [\App\Http\Controllers\EmployeesController::class, 'destroy'])->name('employees.destroy');
-    Route::get('/create-employee', [\App\Http\Controllers\EmployeesController::class, 'create'])->name('employees.create');
-    Route::post('/store-employees', [\App\Http\Controllers\EmployeesController::class, 'store'])->name('employees.store');
-    Route::get('/show-employees->{employees}', [\App\Http\Controllers\EmployeesController::class, 'show'])->name('employees.show');
+    //transaksi
+    Route::get('/data-transaksi', [\App\Http\Controllers\TransaksiController::class, 'index'])->name('transaksi.index');
+    Route::get('/edit-transaksi->{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'edit'])->name('transaksi.edit');
+    Route::put('/data-transaksi/{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'update'])->name('transaksi.update');
+    Route::patch('/data-transaksi/{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'update'])->name('transaksi.update');
+    Route::delete('/data-transaksi/{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'destroy'])->name('transaksi.destroy');
+    Route::get('/create-transaksi', [\App\Http\Controllers\TransaksiController::class, 'create'])->name('transaksi.create');
+    Route::post('/store-transaksi', [\App\Http\Controllers\TransaksiController::class, 'store'])->name('transaksi.store');
+    Route::get('/show-transaksi->{transaksi}', [\App\Http\Controllers\TransaksiController::class, 'show'])->name('transaksi.show');
+    //produk
+    Route::get('/data-produk', [\App\Http\Controllers\ProdukController::class, 'index'])->name('produks.index');
+    Route::get('/edit-produk->{produk}', [\App\Http\Controllers\ProdukController::class, 'edit'])->name('produks.edit');
+    Route::put('/data-produk/{produk}', [\App\Http\Controllers\ProdukController::class, 'update'])->name('produks.update');
+    Route::patch('/data-produk/{produk}', [\App\Http\Controllers\ProdukController::class, 'update'])->name('produks.update');
+    Route::delete('/data-produk/{produk}', [\App\Http\Controllers\ProdukController::class, 'destroy'])->name('produks.destroy');
+    Route::get('/create-produk', [\App\Http\Controllers\ProdukController::class, 'create'])->name('produks.create');
+    Route::post('/store-produk', [\App\Http\Controllers\ProdukController::class, 'store'])->name('produks.store');
+    Route::get('/show-produk->{produk}', [\App\Http\Controllers\ProdukController::class, 'show'])->name('produks.show');
     //service
-    Route::resource('services', \App\Http\Controllers\ServiceController::class);
+    Route::get('/data-tiket', [\App\Http\Controllers\TiketController::class, 'index'])->name('tiket.index');
+    Route::get('/edit-tiket->{tiket}', [\App\Http\Controllers\TiketController::class, 'edit'])->name('tiket.edit');
+    Route::put('/data-tiket/{tiket}', [\App\Http\Controllers\TiketController::class, 'update'])->name('tiket.update');
+    Route::patch('/data-tiket/{tiket}', [\App\Http\Controllers\TiketController::class, 'update'])->name('tiket.update');
+    Route::delete('/data-tiket/{tiket}', [\App\Http\Controllers\TiketController::class, 'destroy'])->name('tiket.destroy');
+    Route::get('/create-tiket', [\App\Http\Controllers\TiketController::class, 'create'])->name('tiket.create');
+    Route::post('/store-tiket', [\App\Http\Controllers\TiketController::class, 'store'])->name('tiket.store');
+    Route::get('/show-tiket->{tiket}', [\App\Http\Controllers\TiketController::class, 'show'])->name('tiket.show');
     
     
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,13 +12,13 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = Customer::paginate(10); // Menampilkan 10 data per halaman
-        return view('customers.index', compact('customers'));
+        $customers = transaksi::paginate(10); // Menampilkan 10 data per halaman
+        return view('transaksi.index', compact('customers'));
     }
 
     public function create()
     {
-        return view('customers.create');
+        return view('transaksi.create');
     }
 
 
@@ -46,25 +47,25 @@ class CustomerController extends Controller
         }
 
         // Membuat customer baru
-        Customer::create($data);
+        transaksi::create($data);
 
-        return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
+        return redirect()->route('transaksi.index')->with('success', 'Transaksi created successfully.');
     }
 
 
-    public function show(Customer $customer)
+    public function show(transaksi $customer)
     {
-        return view('customers.show', compact('customer'));
+        return view('transaksi.show', compact('customer'));
     }
 
 
-    public function edit(Customer $customer)
+    public function edit(transaksi $customer)
     {
-        return view('customers.edit', compact('customer'));
+        return view('transaksi.edit', compact('customer'));
     }
 
 
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, transaksi $customer)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -96,17 +97,19 @@ class CustomerController extends Controller
         // Update customer yang sudah ada
         $customer->update($data);
 
-        return redirect()->route('customers.index')->with('success', 'Customer updated successfully.');
+        return redirect()->route('transaksi.index')->with('success', 'Customer updated successfully.');
     }
 
   
-    public function destroy(Customer $customer)
+    public function destroy(transaksi $customer)
     {
         if ($customer->photo) {
             Storage::delete('public/' . $customer->photo);
         }
+
         $customer->delete();
-        return redirect()->route('customers.index')->with('success', 'Customer deleted successfully.');
+
+        return redirect()->route('transaksi.index')->with('success', 'Customer deleted successfully.');
     }
 }
 

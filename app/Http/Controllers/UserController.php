@@ -8,6 +8,20 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    //API FUNCTION
+    public function login()
+    {
+        request()->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if (auth()->attempt(request(['email', 'password']))) {
+            return response()->json(auth()->user());
+        } else {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+    }
     // Tampilkan daftar pengguna
     public function index()
     {

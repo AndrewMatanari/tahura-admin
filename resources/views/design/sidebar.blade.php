@@ -1,12 +1,22 @@
 {{--sidebar--}}
 
-<div id="sidebar" class="active">
+<style>
+    .theme-dark {
+        --primary-color: #0c7545;
+        --secondary-color: #0c7545;
+        --ternary-color: #0c7545;
+        --quaternary-color: #0c7545;
+        --quinary-color: #0c7545;
+    }
+</style>
+
+<div id="sidebar" class="active theme-dark">
             <div class="sidebar-wrapper active">
     <div class="sidebar-header position-relative">
         <div class="d-flex justify-content-between align-items-center">
             <div class="logo">
                 <a href="{{ url('/dashboard') }}">
-                    <img src="assets/images/logo/logo-dark.svg" alt="Logo" style="width:50%; height:auto;" srcset="" id="logo">
+                    <img src="assets/images/logo/logo.png" alt="Logo" style="width:50%; height:auto;" srcset="" id="logo">
                 </a>
             </div>
             <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -14,9 +24,9 @@
                 <div class="form-check form-switch fs-6">
                     <input class="form-check-input  me-0" type="checkbox" id="toggle-dark" onchange="
                         if (this.checked) {
-                            document.getElementById('logo').src='assets/images/logo/logo.svg';
+                            document.getElementById('logo').src='assets/images/logo/logo.png';
                         } else {
-                            document.getElementById('logo').src='assets/images/logo/logo-dark.svg';
+                            document.getElementById('logo').src='assets/images/logo/logo.png';
                         }
                     ">
                     <label class="form-check-label" ></label>
@@ -35,116 +45,39 @@
             <li class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                 <a href="{{ route('dashboard') }}" class='sidebar-link'>
                     <i class="bi bi-grid-fill"></i>
-                    <span>Dashboard</span>
+                    <span>Dashboard Tahura</span>
                 </a>
             </li>
-
+            
             <li class="sidebar-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
                 <a href="{{ route('user.index') }}" class='sidebar-link'>
                     <i class="bi bi-person-fill"></i>
-                    <span>User</span>
+                    <span>Pengguna</span> 
                 </a>
             </li>
-            <li class="sidebar-title">Pet Care</li>
-            <li class="sidebar-item {{ request()->routeIs('customers.index') ? 'active' : '' }}">
-                <a href="{{route('customers.index')}}" class='sidebar-link'>
-                    <i class="bi bi-people-fill"></i>
-                    <span>Customers</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item {{ request()->routeIs('employee.index') ? 'active' : '' }}">
-                <a href="{{ route('employees.index') }}" class='sidebar-link'>
-                    <i class="bi bi-person-badge-fill"></i>
-                    <span>List Employee</span>
+    
+            <li class="sidebar-item {{ request()->routeIs('tiket.index') ? 'active' : '' }}">
+                <a href="{{ route('tiket.index') }}" class='sidebar-link'>
+                    <i class="bi bi-person-fill"></i>
+                    <span>Tiket</span> 
                 </a>
             </li>
 
-            <li class="sidebar-item ">
-                <a href="application-gallery.html" class='sidebar-link'>
-                    <i class="bi bi-bug-fill"></i>
-                    <span>Pets</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item ">
-                <a href="application-gallery.html" class='sidebar-link'>
-                    <i class="bi bi-file-arrow-down-fill"></i>
-                    <span>Reservations</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item ">
-                <a href="application-gallery.html" class='sidebar-link'>
-                    <i class="bi bi-clipboard2-heart-fill"></i>
-                    <span>Services</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item ">
-                <a href="application-gallery.html" class='sidebar-link'>
+            <li class="sidebar-item {{ request()->routeIs('transaksi.index') ? 'active' : '' }}">
+                <a href="{{route('transaksi.index')}}" class='sidebar-link'>
                     <i class="bi bi-cash-coin"></i>
-                    <span>Transactions</span>
+                    <span>Transaksi</span>
                 </a>
             </li>
-            
-            <!-- <li
-                class="sidebar-item  ">
-                <a href="application-checkout.html" class='sidebar-link'>
-                    <i class="bi bi-basket-fill"></i>
-                    <span>Reservations</span>
-                </a>
-            </li> -->
-            
-            <!-- <li
-                class="sidebar-item  has-sub">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-person-badge-fill"></i>
-                    <span>Services</span>
-                </a>
-                <ul class="submenu ">
-                    <li class="submenu-item ">
-                        <a href="auth-login.html">Login</a>
-                    </li>
-                    <li class="submenu-item ">
-                        <a href="auth-register.html">Register</a>
-                    </li>
-                    <li class="submenu-item ">
-                        <a href="auth-forgot-password.html">Forgot Password</a>
-                    </li>
-                </ul>
-            </li>
-            
-            <li
-                class="sidebar-item  has-sub">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-x-octagon-fill"></i>
-                    <span>Transactions</span>
-                </a>
-                <ul class="submenu ">
-                    <li class="submenu-item ">
-                        <a href="error-403.html">403</a>
-                    </li>
-                    <li class="submenu-item ">
-                        <a href="error-404.html">404</a>
-                    </li>
-                    <li class="submenu-item ">
-                        <a href="error-500.html">500</a>
-                    </li>
-                </ul>
-            </li> -->
-            
-            <li class="sidebar-title">Support</li>
-            
-            <li
-                class="sidebar-item  ">
-                <a href="https://github.com/AndrewMatanari/UAS_2022130035" class='sidebar-link'>
-                    <i class="bi bi-file-code-fill"></i>
-                    <span>Documentation</span>
+
+            <li class="sidebar-item ">
+                <a href="{{ route('produks.index') }}" class="sidebar-link">
+                    <i class="bi bi-bag-plus-fill"></i>
+                    <span>Produk</span>
                 </a>
             </li>
-            
-            <li>
+
+            <li class="sidebar-item ">
                 <a href="{{ route('logout') }}" class="sidebar-link" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
                     <i class="bi bi-box-arrow-right"></i>
@@ -158,4 +91,3 @@
         </ul>
     </div>
 </div>
-        </div>
